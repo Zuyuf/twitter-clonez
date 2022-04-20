@@ -1,15 +1,18 @@
 <template>
-  <div class="bg-td_white flex justify-center w-full py-2 px-10 rounded-full cursor-pointer hover:bg-td_lt_grey">
-      <svg class="h-6" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" >
-         <slot name="svg"></slot>
-      </svg>
-      <p class="text-xbase text-td_black font-ChripBold pl-3">{{ btn_text }}</p>
+  <div
+      class="flex justify-center w-full py-2 px-10
+         rounded-full cursor-pointer
+         bg-td_white hover:bg-td_lt_grey"
+      :class="btn_class"
+   >
+      <slot name="svg"></slot>
+      <p class="text-xbase text-td_black font-ChripBold pl-3" :class="btn_text_class">{{ btn_text }}</p>
    </div>
 </template>
 
 <script>
 export default {
-   name: 'BtnWithIcon',
-   props: ['btn_text']
-}
+  name: 'BtnWithIcon',
+  props: ['btn_text', 'btn_class', 'btn_text_class'],
+};
 </script>
