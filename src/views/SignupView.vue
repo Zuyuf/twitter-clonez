@@ -30,8 +30,8 @@
           <div class="col-span-5 h-px" style="background-color: #2f3336;"></div>
         </div>
 
-        <BtnNormal btn_text="Sign up with a phone number or email address" />
-        <div class="text-xs text-td_dk_grey mt-2">
+        <BtnNormal btn_text="Sign up with email address" :onClick="toggleSignupModal" />
+        <div class="text-xs text-td_dk_grey mt-2 font-ChripRegular">
           By signing up, you agree to the
           <span class="text-td_blue">Terms of Service</span>
           and
@@ -42,17 +42,34 @@
 
         <div class="mt-20">
           <h5 class="text-lg text-td_lt_grey font-ChripBold">Already have an account?</h5>
-          <BtnOutline btn_text="Sign in" />
+          <BtnOutline btn_text="Sign in" :onClick="toggleLoginModal" />
         </div>
 
       </div>
 
     </div>
-
   </div>
+
+  <Modal :showModal="showSignupModal" :onClick="toggleSignupModal">
+    <template v-slot:modal_body>
+      <div class="w-5/6 mx-auto">
+        <SignupForm />
+      </div>
+    </template>
+  </Modal>
+
+  <Modal :showModal="showLoginModal" :onClick="toggleLoginModal">
+  <template v-slot:modal_body>
+    <div class="w-5/6 mx-auto">
+      <LoginForm />
+    </div>
+  </template>
+  </Modal>
 </template>
 
 <script>
+import Modal from '@/components/modalComponent.vue';
+
 import BtnWithIcon from '@/components/buttons/btnWithIcon.vue';
 import BtnOutline from '@/components/buttons/btnOutline.vue';
 import BtnNormal from '@/components/buttons/btn.vue';
@@ -61,10 +78,29 @@ import TwitterSvg from '@/components/svg/twitter_svg.vue';
 import GoogleSvg from '@/components/svg/google_svg.vue';
 import AppleSvg from '@/components/svg/apple_svg.vue';
 
+import SignupForm from '@/components/forms/signupForm.vue';
+import LoginForm from '@/components/forms/loginForm.vue';
+
 import '@/index.css';
+
+//
 
 export default {
   name: 'App',
+  data() {
+    return {
+      showSignupModal: false,
+      showLoginModal: false,
+    };
+  },
+  methods: {
+    toggleSignupModal() {
+      this.showSignupModal = !this.showSignupModal;
+    },
+    toggleLoginModal() {
+      this.showLoginModal = !this.showLoginModal;
+    },
+  },
   components: {
     BtnWithIcon,
     BtnNormal,
@@ -72,6 +108,9 @@ export default {
     TwitterSvg,
     GoogleSvg,
     AppleSvg,
+    Modal,
+    SignupForm,
+    LoginForm,
   },
 };
 </script>
