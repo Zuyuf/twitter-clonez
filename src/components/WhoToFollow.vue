@@ -5,14 +5,14 @@
     <!-- eslint-disable-next-line max-len -->
     <!-- eslint-disable-next-line vue/require-v-for-key -->
     <template v-for="follow_rec in showFollow" :key="follow_rec.id">
-      <button class="w-full flex p-3">
+      <button class="w-full flex p-3 px-5 hover:bg-td_lt_grey hover:bg-opacity-5">
         <img :src="`${follow_rec.src}`" class="w-10 h-10 rounded-full border border-lighter" alt="" />
         <div class="hidden lg:block ml-4">
           <p class="text-sm font-ChripBold"> {{ follow_rec.name }} </p>
           <p class="text-sm text-left font-ChripRegular text-td_dk_grey"> {{ follow_rec.handle }} </p>
         </div>
 
-        <button class="ml-auto py-1 px-4 rounded-full
+        <button class="ml-auto py-0.5 px-3.5 rounded-full
             bg-white hover:bg-td_xlt_grey
             text-black text-sm font-ChripBold
             self-center">

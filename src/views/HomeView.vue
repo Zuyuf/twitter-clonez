@@ -1,11 +1,11 @@
 <template>
   <div class="bg-td_black">
-    <div class="bg-td_black flex w-[1400px] h-screen mx-auto">
+    <div class="bg-td_black flex w-[1280px] h-screen mx-auto">
       <Sidebar />
       <FeedsSection />
 
       <div class="text-white font-ChripRegular
-        md:block hidden w-[28%] h-full
+        md:block hidden w-[35%] h-full
         py-2 px-6 relative">
 
         <SearchBar />
