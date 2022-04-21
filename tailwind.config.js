@@ -26,6 +26,8 @@ module.exports = {
         td_white: '#ffffff',
         td_dk_grey: '#71767b',
         td_dk_grey2: '#536471',
+        td_dk_grey3: '#202327',
+        td_dk_grey4: '#16181C',
         td_lt_grey: '#d6d9db',
         td_xlt_grey: '#e7e7e6',
       },

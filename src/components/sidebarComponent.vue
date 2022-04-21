@@ -5,7 +5,7 @@
 
     <div>
       <button class="mt-4 ml-6 h-14 w-14
-        hover:bg-td_blue text-3xl rounded-full text-td_lt_grey
+        hover:bg-td_dk_grey hover:bg-opacity-20 text-3xl rounded-full text-td_lt_grey
         flex justify-center items-center"
       >
         <TwitterSvg svg_class="fill-td_lt_grey w-8" />
