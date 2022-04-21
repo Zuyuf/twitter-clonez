@@ -3,11 +3,11 @@
     :type="btn_type"
     class="flex justify-center w-full py-2 px-5
       rounded-full cursor-pointer
-      bg-td_blue hover:bg-td_blue2"
+      bg-td_blue hover:bg-td_dark_blue"
     :class="btn_class"
     @click.prevent="onClick"
   >
-    <p class="text-xbase truncate font-ChripBold pl-3 text-td_white" :class="btn_text_class">{{ btn_text }}</p>
+    <p class="text-xbase truncate font-ChripBold text-td_white" :class="btn_text_class">{{ btn_text }}</p>
   </button>
 </template>
 

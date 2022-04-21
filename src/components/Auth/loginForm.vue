@@ -8,7 +8,7 @@
       type="submit"
       class="flex justify-center w-full py-2 px-5
         rounded-full cursor-pointer
-        bg-td_blue hover:bg-td_blue2
+        bg-td_blue hover:bg-td_dark_blue
         mt-14"
     >
       <p class="text-xbase truncate font-ChripBold pl-3 text-td_white">Sign in</p>

@@ -78,15 +78,15 @@ import TwitterSvg from '@/components/svg/twitter_svg.vue';
 import GoogleSvg from '@/components/svg/google_svg.vue';
 import AppleSvg from '@/components/svg/apple_svg.vue';
 
-import SignupForm from '@/components/forms/signupForm.vue';
-import LoginForm from '@/components/forms/loginForm.vue';
+import SignupForm from '@/components/Auth/signupForm.vue';
+import LoginForm from '@/components/Auth/loginForm.vue';
 
 import '@/index.css';
 
 //
 
 export default {
-  name: 'App',
+  name: 'IndexView',
   data() {
     return {
       showSignupModal: false,
