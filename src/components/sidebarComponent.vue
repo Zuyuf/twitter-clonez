@@ -28,7 +28,7 @@
 
     <!-- Dropdown -->
     <div class="lg:w-full relative">
-      <button @click="dropdown = !dropdown" class="flex items-center w-full px-5 py-3
+      <button @click="dropdown = !dropdown" class="flex items-center w-full px-5 py-2.5
             bg-black hover:bg-td_dk_grey hover:bg-opacity-20 rounded-full focus:outline-none">
         <img src="@/assets/imgs/geralt_profile1.jpg" class="w-11 h-11 rounded-full border border-white"
           alt="User Profile Image" />
@@ -39,7 +39,7 @@
         <i class="hidden text-white lg:block fas fa-ellipsis-h ml-auto text-lg"></i>
       </button>
 
-      <div v-if="dropdown === true" class="bg-black absolute bottom-0 left-0
+      <div v-if="dropdown === true" class="bg-black absolute bottom-1 left-0
             w-64 rounded-lg shadow-md border-td_lt_grey
             mb-16 dropdown_boxshadow">
         <button @click="dropdown = false" class="p-3 flex items-center w-full focus:outline-none
