@@ -12,7 +12,7 @@
           <p class="text-sm text-left font-ChripRegular text-td_dk_grey"> {{ follow_rec.handle }} </p>
         </div>
 
-        <button class="ml-auto py-0.5 px-3.5 rounded-full
+        <button class="ml-auto py-1 px-3.5 rounded-full
             bg-white hover:bg-td_xlt_grey
             text-black text-sm font-ChripBold
             self-center">

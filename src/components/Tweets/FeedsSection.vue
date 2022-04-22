@@ -1,12 +1,18 @@
 <template>
   <!-- tweets -->
-  <div class="w-full md:w-1/2 h-full border-r border-td_seprator text-white font-ChripRegular">
-    <div class="sticky px-5 py-3 border-b border-td_seprator flex items-center justify-between">
+  <div class="w-full md:w-1/2 h-full
+      border-r border-td_seprator
+    text-white font-ChripRegular
+    overflow-y-scroll hide_scrollbar">
+    <div class="sticky top-0 w-full px-5 py-3
+        border-b border-td_seprator
+        flex items-center justify-between
+       backdrop-blur-md">
       <h1 class="text-xl font-ChripExtendedHeavy">Home</h1>
       <i class="far fa-light fa-star text-xl text-td_dk_grey"></i>
     </div>
 
-    <div class="overflow-y-hidden">
+    <div>
       <TweetForm />
       <Tweets />
     </div>
@@ -34,3 +40,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.hide_scrollbar::-webkit-scrollbar {
+  display: none;
+}
+</style>

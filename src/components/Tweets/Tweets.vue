@@ -54,27 +54,45 @@ export default {
           name: 'Elon Musk',
           handle: '@teslaBoy',
           time: '20 min',
-          tweet: 'Should I just quarantine on mars??',
+          // eslint-disable-next-line max-len
+          tweet: 'Please consider working at The Boring Company! Our goal is to solve traffic, which plagues every major city on Earth.',
           comments: '1282',
           retweets: '550',
           like: '100k',
         },
         {
           src: '/imgs/kevin.jpg',
-          name: 'Kevin Hart',
-          handle: '@miniRock',
+          name: 'OKX',
+          handle: '@okx',
           time: '55 min',
-          tweet: 'Should me and the rock do another sub-par movie together????',
+          tweet: `📣 3rd round of 
+            @terra_money
+            project Flash Deals INCOMING ⚡️ 
+
+            Stake $ANC 
+            @anchor_protocol
+            with up to 1️⃣0️⃣5️⃣% APY on #OKXEarn starting from today at 3:00 am (UTC)! 🔗 https://bit.ly/3L7CZGM
+
+            💡 First come, first served
+
+            Learn more ⤵️`,
           comments: '2,030',
           retweets: '50',
           like: '20.2k',
         },
         {
-          src: '/imgs/elon.jpg',
-          name: 'Elon Musk',
+          src: '/imgs/terra.jpg',
+          name: 'Terra',
           handle: '@teslaBoy',
           time: '1.4 hr',
-          tweet: 'Haha just made a flame thrower. Shld I sell them?',
+          // eslint-disable-next-line max-len
+          tweet: `1/ Attention Firefox users, the Terra Station Wallet browser extension is now supported on Firefox! 🎉 🦊
+          
+            To download the extension & start using it on 
+            @firefox
+            , follow this short tutorial 👇
+
+            https://docs.terra.money/docs/learn/terra-station/download/terra-station-firefox.html`,
           comments: '127k',
           retweets: '245.6k',
           like: '571.4k',
