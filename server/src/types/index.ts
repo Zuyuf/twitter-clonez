@@ -6,11 +6,12 @@ import { IRole } from './auth';
 import { IPassword, IUser, IUserPublic } from './auth/user';
 
 import { ITweet } from './tweet';
+import { ITweetComment } from './tweet/tweetComment';
 
 export {
   IListObjValidate, IObjValidate,
   KnexConfig,
   CreateToken, DecodeToken, EncryptPassword,
   IPassword, IUser, IUserPublic, IRole,
-  ITweet,
+  ITweet, ITweetComment
 };

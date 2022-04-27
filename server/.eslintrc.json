@@ -4,12 +4,12 @@
         "node": true
     },
     "extends": [
+        "standard"
         // "airbnb"
-        // "standard"
         // "plugin:prettier/recommended"
-        "eslint:recommended",
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended"
+        // "eslint:recommended",
+        // "plugin:@typescript-eslint/eslint-recommended",
+        // "plugin:@typescript-eslint/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -20,5 +20,7 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "semi": ["error", "always"],
+        "space-before-function-paren": ["error", { "anonymous": "always", "named": "never", "asyncArrow": "always" }]
     }
 }
