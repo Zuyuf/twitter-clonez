@@ -2,8 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 import {
   body, query, param, validationResult, Result, ValidationError, ValidationChain,
 } from 'express-validator';
-import { response } from '../utils/response';
-import { IObjValidate } from '../types';
+import { response } from '@utils/response';
+import { IObjValidate } from '@types';
 
 export const ExistsValidator = (objValidate: IObjValidate) => async (req: Request, res: Response, next: NextFunction) => {
   if (objValidate?.body) {

@@ -1,4 +1,4 @@
-import HASH from '../../utils/hash.util';
+import HASH from '@utils/hash.util';
 
 function password(pass) {
   const _password = HASH.encrypt(pass);

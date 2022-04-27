@@ -6,6 +6,7 @@ type IPassword = {
 };
 
 type IUser = {
+  id?: number
   name: string
   email: string
   provider: string

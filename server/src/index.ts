@@ -10,6 +10,7 @@ import globalErrorHandler from '@middlewares/globalErrorHandler';
 
 // Routes 
 import user_routes from '@controllers/auth/user.controller';
+import tweet_routes from '@controllers/tweets.controller';
 
 // -----------------------------------------------------------------
 
@@ -33,6 +34,7 @@ class Server {
 
       // Routes
       this.app.use(['/users'], user_routes);
+      this.app.use(['/tweets'], tweet_routes);
 
           // Globbal Error Handler
     this.app.use(globalErrorHandler);
