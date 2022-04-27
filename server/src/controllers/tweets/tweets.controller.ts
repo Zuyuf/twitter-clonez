@@ -10,9 +10,11 @@ import { TweetCommentModel } from '@/models/tweetComments';
 
 /**
  * APIs List:
- * 1. GET    /:id
- * 2. GET    /all
- * 3. POST   /create
+ * 1. GET    /all
+ * 2. GET    /:tweet_id
+ * 3. GET    /:tweet_id/comments
+ * 4. POST   /:tweet_id/create_comment
+ * 5. POST   /create
  */
 
 const router: Router = express.Router();
@@ -64,7 +66,7 @@ router.get('/:tweet_id/comments', [Authenticate(['user']), ExistsValidator(Valid
 });
 
 /** Create TweetComment for TweetID */
-router.post('/:tweet_id/create', [Authenticate(['user']), ExistsValidator(Validate.CreateTweetComment)], async (req: Request, res: Response) => {
+router.post('/:tweet_id/create_comment', [Authenticate(['user']), ExistsValidator(Validate.CreateTweetComment)], async (req: Request, res: Response) => {
   try {
     const tweetCommentData: ITweetComment = {
       userId: req.user?.id as number,
@@ -81,7 +83,7 @@ router.post('/:tweet_id/create', [Authenticate(['user']), ExistsValidator(Valida
   }
 });
 
-/** Fetch Tweet by ID */
+/** Create Tweet */
 router.post('/create', [Authenticate(['user']), ExistsValidator(Validate.Create)], async (req: Request, res: Response) => {
   try {
     const tweetData: ITweet = {
