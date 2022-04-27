@@ -43,7 +43,6 @@ router.get('/all', Authenticate(['user']), async (req: Request, res: Response) =
 router.get('/:tweet_id', [Authenticate(['user']), ExistsValidator(Validate.TweetId)], async (req: Request, res: Response) => {
   try {
     const tweet = await TweetModel.query().findById(req.params.tweet_id);
-
     if (!tweet) return response(404, { message: 'Tweet with given id was not found' }, res);
 
     return response(200, { message: 'Fetched Tweet', tweet }, res);

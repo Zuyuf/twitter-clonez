@@ -4,6 +4,7 @@ import { KnexConfig } from './knex';
 
 import { IRole } from './auth';
 import { IPassword, IUser, IUserPublic } from './auth/user';
+import { IConnection } from './auth/connection';
 
 import { ITweet } from './tweet';
 import { ITweetComment } from './tweet/tweetComment';
@@ -13,5 +14,6 @@ export {
   KnexConfig,
   CreateToken, DecodeToken, EncryptPassword,
   IPassword, IUser, IUserPublic, IRole,
+  IConnection,
   ITweet, ITweetComment
 };
