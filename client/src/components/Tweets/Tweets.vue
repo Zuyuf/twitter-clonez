@@ -10,7 +10,7 @@
       <div class="w-full">
         <div class="flex items-center w-full font-ChripRegular">
           <p class="text-lg text-white"> {{ twt.user[0].name }} </p>
-          <p class="text-base text-td_dk_grey ml-2"> @{{ twt.user[0].name }} </p>
+          <p class="text-base text-td_dk_grey ml-2"> @{{ twt.user[0].name.toLowerCase().replaceAll(' ', '_') }} </p>
           <p class="text-2xl text-td_dk_grey ml-2">.</p>
           <p class="text-base text-td_dk_grey ml-2"> {{ timeAgo(twt.created_at) }} </p>
           <i class="fas fa-ellipsis-h text-td_dk_grey ml-auto"></i>

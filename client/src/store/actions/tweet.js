@@ -20,6 +20,24 @@ const tweetActions = {
       );
     }
   },
+  async createTweet(ctx, payload) {
+    try {
+      const RESP = await HTTP.post('/tweets/create', {
+        body: payload.body,
+      });
+
+      if (RESP.status !== 200) {
+        return Promise.reject(new Error('ERROR: Error while Creating tweet'));
+      }
+
+      return Promise.resolve(RESP.data.result.tweet);
+    } catch (error) {
+      return Promise.reject(
+        // eslint-disable-next-line comma-dangle
+        new Error('ERROR: Something went wrong in Fetch Tweets Action')
+      );
+    }
+  },
 };
 
 export { tweetActions };
