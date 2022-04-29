@@ -6,4 +6,7 @@ export default {
   setUser: (state, payload) => {
     state.user = payload;
   },
+  setTweets: (state, payload) => {
+    state.tweets = payload;
+  },
 };

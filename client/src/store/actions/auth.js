@@ -2,7 +2,7 @@
 import JWT_DECOEDE from 'jwt-decode';
 import HTTP from '@/services/index';
 
-export default {
+const authActions = {
   async login(ctx, payload) {
     try {
       const RES = await HTTP.post('/users/login', {
@@ -50,6 +50,10 @@ export default {
       );
     }
   },
+  async signout() {
+    localStorage.removeItem('token');
+    window.location.reload();
+  },
   async init_login(ctx) {
     const token = localStorage.getItem('token');
 
@@ -61,3 +65,6 @@ export default {
     }
   },
 };
+
+export { authActions };
+export default authActions;

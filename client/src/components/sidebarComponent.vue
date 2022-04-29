@@ -33,8 +33,8 @@
         <img src="@/assets/imgs/geralt_profile1.jpg" class="w-11 h-11 rounded-full border border-white"
           alt="User Profile Image" />
         <div class="hidden lg:block ml-4">
-          <p class="text-sm text-white font-ChripBold leading-tigh text-left"> Geralt of Rivia </p>
-          <p class="text-sm text-td_dk_grey font-ChripRegular leading-tight text-left"> @geralt </p>
+          <p class="text-sm text-white font-ChripBold leading-tigh text-left"> {{ user.name }} </p>
+          <p class="text-sm text-td_dk_grey font-ChripRegular leading-tight text-left"> {{ user.handler }} </p>
         </div>
         <i class="hidden text-white lg:block fas fa-ellipsis-h ml-auto text-lg"></i>
       </button>
@@ -47,8 +47,8 @@
           <img src="@/assets/imgs/geralt_profile1.jpg" class="w-14 h-14 rounded-full border border-white"
             alt="User Profile Image" />
           <div class="ml-4">
-            <p class="text-sm text-white font-ChripBold leading-tight text-left"> Geralt of Rivia </p>
-            <p class="text-sm text-td_dk_grey font-ChripRegular leading-tight text-left"> @geralt </p>
+            <p class="text-sm text-white font-ChripBold leading-tight text-left"> {{ user.name }} </p>
+            <p class="text-sm text-td_dk_grey font-ChripRegular leading-tight text-left"> {{ user.handler }} </p>
           </div>
           <i class="text-sm text-td_blue fas fa-check pr-2 ml-auto test-blue"></i>
         </button>
@@ -57,10 +57,10 @@
             p-3 test-sm focus:outline-none">
           Add an existing account
         </button>
-        <button @click="dropdown = false" class="text-td_lt_grey font-ChripRegular w-full text-left
+        <button @click="signout" class="text-td_lt_grey font-ChripRegular w-full text-left
               hover:bg-td_dk_grey hover:bg-opacity-20 border-t border-td_seprator
               p-3 test-sm focus:outline-none">
-          Log out @geralt
+          Log out {{ user.handler }}
         </button>
       </div>
 
@@ -70,6 +70,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 import TwitterSvg from '@/components/svg/twitter_svg.vue';
 import BtnNormal from '@/components/buttons/btn.vue';
 
@@ -89,6 +91,24 @@ export default {
       id: 'home',
       dropdown: false,
     };
+  },
+  methods: {
+    ...mapActions(['signout']),
+  },
+  computed: {
+    user() {
+      const stateUser = this.$store.state.user;
+      // eslint-disable-next-line no-underscore-dangle
+      let _user = null;
+
+      if (stateUser !== null) {
+        _user = {
+          ...stateUser,
+          handler: `@${stateUser.name.toLowerCase().replaceAll(' ', '_')}`,
+        };
+      }
+      return _user;
+    },
   },
   components: {
     TwitterSvg,

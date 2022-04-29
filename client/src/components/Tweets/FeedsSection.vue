@@ -25,7 +25,7 @@ import TweetForm from '@/components/Tweets/TweetForm.vue';
 import Tweets from '@/components/Tweets/Tweets.vue';
 
 export default {
-  name: 'TweetsBox',
+  name: 'FeedsSction',
   data() {
     return {
       // tweets: [

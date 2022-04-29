@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import { Account } from './auth';
+import { Account } from './auth';
 
 // const { BASE_URL } = process.env;
 const BASE_URL = 'http://localhost:4400';
@@ -8,7 +8,7 @@ const BASE_URL = 'http://localhost:4400';
 const _axios = axios.create({
   baseURL: BASE_URL,
   headers: {
-    // Authorization: Account.getJWT() ?? undefined,
+    Authorization: Account.getJWT() ?? null,
   },
 });
 
