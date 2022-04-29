@@ -4,6 +4,8 @@ import IndexView from '@/views/IndexView.vue';
 import HomeView from '@/views/HomeView.vue';
 import UserProfileView from '@/views/ProfileView.vue';
 
+import store from '@/store';
+
 //
 
 const routes = [
@@ -11,16 +13,19 @@ const routes = [
     name: 'index',
     path: '/',
     component: IndexView,
+    meta: { cantAccessIfLoggedIn: true },
   },
   {
     name: 'home',
     path: '/home',
     component: HomeView,
+    meta: { authRequired: true },
   },
   {
     name: 'profile',
     path: '/profile',
     component: UserProfileView,
+    meta: { authRequired: true },
   },
   // {
   //   name: 'about',
@@ -36,6 +41,23 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+// Global Route Gaurd
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.cantAccessIfLoggedIn)) {
+    if (store.state.userLoggedIn) next({ name: 'home' });
+    else next();
+    return;
+  }
+
+  if (!to.matched.some((record) => record.meta.authRequired)) {
+    next();
+    return;
+  }
+
+  if (store.state.userLoggedIn) next();
+  else next({ name: 'index' });
 });
 
 export default router;

@@ -22,7 +22,7 @@ import { ConnectionModel } from '@/models/connections';
 
 const router: Router = express.Router();
 const Validate = {
-  Create: { body: ['name', 'email', 'provider', 'password'] },
+  Register: { body: ['name', 'email', 'password'] },
   Login: { body: ['email', 'password'] },
   Follow: { body: ['followUserId'] }
 };
@@ -45,6 +45,8 @@ router.get('/me', Authenticate(['user']), async (req: Request, res: Response) =>
 /** Login */
 router.post('/login', ExistsValidator(Validate.Login), async (req: Request, res: Response) => {
   try {
+    console.log('login api');
+
     const user = await UserModel
       .query()
       .findOne({ email: req.body.email });
@@ -76,7 +78,7 @@ router.post('/login', ExistsValidator(Validate.Login), async (req: Request, res:
 });
 
 /** Create Admin */
-router.post('/signup', ExistsValidator(Validate.Create), async (req: Request, res: Response) => {
+router.post('/signup', ExistsValidator(Validate.Register), async (req: Request, res: Response) => {
   try {
     const encrypt_password: EncryptPassword = await Hash.encrypt(req.body.password);
     if (encrypt_password.error || !encrypt_password.password) throw new Error(`Password should contain some value: ${encrypt_password.error}`);
@@ -84,7 +86,7 @@ router.post('/signup', ExistsValidator(Validate.Create), async (req: Request, re
     const user_data: IUser = {
       name: req.body.name,
       email: req.body.email,
-      provider: req.body.provider,
+      provider: 'email',
       hashedPassword: encrypt_password.password.hash,
       salt: encrypt_password.password.salt,
       role: 'user',
@@ -107,7 +109,7 @@ router.post('/signup', ExistsValidator(Validate.Create), async (req: Request, re
     const token: CreateToken = await create_token(userPublic, 1 * 24 * 60 * 60);
     if (!token.token) return response(400, { message: 'Exception in creating a token' }, res);
 
-    return response(201, { message: 'User Created', user: new_user, token: token.token }, res);
+    return response(200, { message: 'User Created', user: new_user, token: token.token }, res);
   } catch (error) {
     return response(500, { message: 'Exception in Create User API' }, res, error);
   }
