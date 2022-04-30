@@ -9,4 +9,7 @@ export default {
   setTweets: (state, payload) => {
     state.tweets = payload;
   },
+  setUserStats: (state, payload) => {
+    state.userStats = payload;
+  },
 };

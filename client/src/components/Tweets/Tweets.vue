@@ -59,8 +59,8 @@ export default {
   data() {
     return {};
   },
-  created() {
-    this.fetchTweets();
+  async created() {
+    await this.fetchTweets();
   },
   methods: {
     ...mapActions(['fetchTweets']),

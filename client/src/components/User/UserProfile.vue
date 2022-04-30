@@ -10,8 +10,8 @@
       backdrop-blur-md">
       <i class="fas fa-arrow-left text-lg ml-2 text-td_lt_grey"></i>
       <div class="flex flex-col ml-10">
-        <h1 class="text-lg font-ChripBold text-td_lt_grey">Geralt of Rivia</h1>
-        <h5 class="text-xs font-ChripRegular text-td_dk_grey -mt-1.5">2 Tweets</h5>
+        <h1 class="text-lg font-ChripBold text-td_lt_grey">{{ user.name }}</h1>
+        <h5 class="text-xs font-ChripRegular text-td_dk_grey -mt-1.5">{{ userStats.tweet_count }} Tweets</h5>
       </div>
     </div>
 
@@ -30,19 +30,19 @@
         </button>
       </div>
       <div class="mt-3 px-5">
-        <h1 class="text-xl text-white font-ChripBold">Geralt of Rivia</h1>
-        <h5 class="-mt-1 text-base text-td_dk_grey font-ChripRegular">@GrealtRivia</h5>
+        <h1 class="text-xl text-white font-ChripBold">{{ user.name }}</h1>
+        <h5 class="-mt-1 text-base text-td_dk_grey font-ChripRegular">{{ user.handler }}</h5>
         <div class="flex mt-1">
           <i class="far fa-calendar-alt text-sm text-td_dk_grey"></i>
-          <p class="ml-2 text-base text-td_dk_grey font-ChripRegular">Joined November 2019</p>
+          <p class="ml-2 text-base text-td_dk_grey font-ChripRegular">joined on {{ joinedAt(user.created_at) }}</p>
         </div>
         <div class="flex text-base text-td_dk_grey font-ChripRegular">
           <p>
-            <span class="text-white">14</span>
+            <span class="text-white">{{ userStats.user_follows_count }}</span>
             Following
           </p>
           <p class="ml-4">
-            <span class="text-white">8</span>
+            <span class="text-white">{{ userStats.user_followers_count }}</span>
             Followers
           </p>
         </div>
@@ -53,8 +53,37 @@
 </template>
 
 <script>
-export default {
+import day from 'dayjs';
+import { mapActions } from 'vuex';
 
+export default {
+  async created() {
+    await this.fetchUserStats();
+  },
+  methods: {
+    ...mapActions(['fetchUserStats']),
+    joinedAt(date) {
+      return day(date).format('MMMM YYYY');
+    },
+  },
+  computed: {
+    user() {
+      const stateUser = this.$store.state.user;
+      // eslint-disable-next-line no-underscore-dangle
+      let _user = null;
+
+      if (stateUser !== null) {
+        _user = {
+          ...stateUser,
+          handler: `@${stateUser.name.toLowerCase().replaceAll(' ', '_')}`,
+        };
+      }
+      return _user;
+    },
+    userStats() {
+      return this.$store.state.userStats;
+    },
+  },
 };
 </script>
 

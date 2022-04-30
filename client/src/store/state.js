@@ -3,4 +3,5 @@ export default {
   userLoggedIn: false,
   user: null,
   tweets: null,
+  userStats: {},
 };
