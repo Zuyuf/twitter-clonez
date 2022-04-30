@@ -12,6 +12,7 @@ import { create_token } from '@utils/jwt.util';
 
 import { UserModel } from '@models/users';
 import { ConnectionModel } from '@/models/connections';
+import { TweetModel } from '@/models/tweets';
 
 /**
  * APIs List:
@@ -42,6 +43,34 @@ router.get('/me', Authenticate(['user']), async (req: Request, res: Response) =>
   }
 });
 
+/** stats */
+router.get('/my/stats', Authenticate(['user']), async (req: Request, res: Response) => {
+  try {
+    if (req.user === undefined) {
+      return response(403, { message: 'Unauthorized' }, res);
+    }
+
+    const userTweetCount = await TweetModel.query().where('userId', req.user?.id as number).count();
+    if (!userTweetCount || userTweetCount.length < 1) return response(400, { message: 'Failed to get Tweet count' }, res);
+
+    const userFollowsCount = await ConnectionModel.query().where('userId', req.user?.id as number).count();
+    if (!userFollowsCount || userFollowsCount.length < 1) return response(400, { message: 'Failed to get users follows count' }, res);
+
+    const userFollowersCount = await ConnectionModel.query().where('followsUserId', req.user?.id as number).count();
+    if (!userFollowersCount || userFollowersCount.length < 1) return response(400, { message: 'Failed to get users followers count' }, res);
+
+    const userStats = {
+      tweet_count: userTweetCount[0].count,
+      user_follows_count: userFollowsCount[0].count,
+      user_followers_count: userFollowersCount[0].count
+    };
+
+    return response(200, { message: 'Fetched User Stats', userStats }, res);
+  } catch (error) {
+    return response(500, { message: 'Exception in Fetching User Profile' }, res, error);
+  }
+});
+
 /** Login */
 router.post('/login', ExistsValidator(Validate.Login), async (req: Request, res: Response) => {
   try {
@@ -65,7 +94,9 @@ router.post('/login', ExistsValidator(Validate.Login), async (req: Request, res:
       email: user.email,
       provider: user.provider,
       verifiedBadge: user.verifiedBadge,
-      role: user.role
+      role: user.role,
+      created_at: user.created_at,
+      updated_at: user.updated_at
     };
 
     const token: CreateToken = await create_token(userPublic, 1 * 24 * 60 * 60);
@@ -102,7 +133,9 @@ router.post('/signup', ExistsValidator(Validate.Register), async (req: Request, 
       email: new_user.email,
       provider: new_user.provider,
       verifiedBadge: new_user.verifiedBadge,
-      role: new_user.role
+      role: new_user.role,
+      created_at: new_user.created_at,
+      updated_at: new_user.updated_at
     };
 
     // Password matched, Create Token

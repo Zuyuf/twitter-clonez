@@ -1,4 +1,4 @@
-import { IRole } from ".";
+import { IRole } from '.';
 
 type IPassword = {
   hash: string,
@@ -14,8 +14,10 @@ type IUser = {
   salt: IPassword['salt']
   verifiedBadge: boolean
   role: IRole,
+  created_at?: Date
+  updated_at?: Date
 };
 
 type IUserPublic = Omit<IUser, 'hashedPassword' | 'salt'>;
 
-export { IUser, IUserPublic, IPassword }
+export { IUser, IUserPublic, IPassword };

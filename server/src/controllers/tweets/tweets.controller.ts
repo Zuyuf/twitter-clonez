@@ -29,7 +29,17 @@ const Validate = {
 /** Fetch All Tweets */
 router.get('/all', Authenticate(['user']), async (req: Request, res: Response) => {
   try {
-    const tweets = await TweetModel.query();
+    const tweets = await TweetModel
+      .query()
+      .withGraphFetched('user(defaultSelect)')
+      .modifiers({
+        defaultSelect: builder => builder.select('id', 'name', 'email')
+      });
+      // .modifyGraph('users', builder => {
+      //   builder
+      //     .findOne('users.id', 'tweets.userId')
+      //     .select('users.name', 'users.email');
+      // });
 
     if (!tweets) return response(400, { message: 'Some error' }, res);
 
