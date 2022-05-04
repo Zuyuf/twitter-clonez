@@ -10,7 +10,7 @@
 
         <SearchBar />
         <Trending :trending="trending" />
-        <WhoToFollow :follow_recs="follow_recs" />
+        <WhoToFollow v-if="usersICanFollow.length > 0" :usersICanFollow="usersICanFollow" />
 
       </div>
 
@@ -24,6 +24,8 @@ import SearchBar from '@/components/SearchComponent.vue';
 import FeedsSection from '@/components/Tweets/FeedsSection.vue';
 import Trending from '@/components/Trending.vue';
 import WhoToFollow from '@/components/WhoToFollow.vue';
+
+import { mapActions } from 'vuex';
 
 export default {
   data() {
@@ -62,33 +64,18 @@ export default {
           bottom: '25.4k tweets',
         },
       ],
-      follow_recs: [
-        {
-          id: 1,
-          src: '/imgs/elon.jpg',
-          name: 'Elon Musk',
-          handle: '@teslaBoy',
-        },
-        {
-          id: 2,
-          src: '/imgs/monk.jpg',
-          name: 'Adrian Monk',
-          handle: '@detective:)',
-        },
-        {
-          id: 3,
-          src: '/imgs/kevin.jpg',
-          name: 'Kevin Hart',
-          handle: '@miniRock',
-        },
-        {
-          id: 5,
-          src: '/imgs/elon.jpg',
-          name: 'Elon Musk',
-          handle: '@teslaBoy',
-        },
-      ],
     };
+  },
+  async created() {
+    await this.fetchUsersICanFollow();
+  },
+  methods: {
+    ...mapActions(['fetchUsersICanFollow']),
+  },
+  computed: {
+    usersICanFollow() {
+      return this.$store.state.usersICanFollow;
+    },
   },
   components: {
     Sidebar,

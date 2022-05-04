@@ -4,15 +4,22 @@
 
     <!-- eslint-disable-next-line max-len -->
     <!-- eslint-disable-next-line vue/require-v-for-key -->
-    <template v-for="follow_rec in showFollow" :key="follow_rec.id">
+    <!-- eslint-disable-next-line vue/no-unused-vars -->
+    <template v-for="(follow_rec, idx) in showFollow" :key="follow_rec.id">
       <button class="w-full flex p-3 px-5 hover:bg-td_lt_grey hover:bg-opacity-5">
-        <img :src="`${follow_rec.src}`" class="w-10 h-10 rounded-full border border-lighter" alt="" />
+        <img src="https://picsum.photos/100" class="w-10 h-10 rounded-full border border-lighter" alt="" />
         <div class="hidden lg:block ml-4">
           <p class="text-sm font-ChripBold"> {{ follow_rec.name }} </p>
-          <p class="text-sm text-left font-ChripRegular text-td_dk_grey"> {{ follow_rec.handle }} </p>
+          <p class="text-sm text-left font-ChripRegular text-td_dk_grey"> {{ createHandler(follow_rec.name) }} </p>
         </div>
 
-        <button class="ml-auto py-1 px-3.5 rounded-full
+        <button v-if="follow_rec.following" class="ml-auto py-1 px-3.5 rounded-full
+            bg-td_dk_grey hover:opacity-80
+            text-black text-sm font-ChripBold
+            self-center">
+          Followed
+        </button>
+        <button v-else @click.prevent="followUser(follow_rec.id, idx)" class="ml-auto py-1 px-3.5 rounded-full
             bg-white hover:bg-td_xlt_grey
             text-black text-sm font-ChripBold
             self-center">
@@ -28,18 +35,26 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'TrendingComponent',
   props: {
-    follow_recs: Array,
+    usersICanFollow: Array,
+  },
+  methods: {
+    ...mapActions(['followUser']),
+    createHandler(name) {
+      return `@${name.toLowerCase().replaceAll(' ', '_')}`;
+    },
   },
   computed: {
     showFollow() {
-      const len = this.follow_recs.length;
-      return len > 3 ? this.follow_recs.slice(0, 3) : this.follow_recs;
+      const len = this.usersICanFollow.length;
+      return len > 3 ? this.usersICanFollow.slice(0, 3) : this.usersICanFollow;
     },
     showMoreBtn() {
-      const len = this.follow_recs.length;
+      const len = this.usersICanFollow.length;
       return len > 3;
     },
   },
