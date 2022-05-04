@@ -71,10 +71,31 @@ router.get('/my/stats', Authenticate(['user']), async (req: Request, res: Respon
   }
 });
 
+/** stats */
+router.get('/users_i_can_follow', Authenticate(['user']), async (req: Request, res: Response) => {
+  try {
+    if (req.user === undefined) {
+      return response(403, { message: 'Unauthorized' }, res);
+    }
+
+    const usersExceptMe = await UserModel.query().whereNot('id', req.user?.id as number).select('id', 'name', 'email');
+    if (!usersExceptMe) return response(400, { message: 'Failed to get users' }, res);
+
+    const usersIFollow = await ConnectionModel.query().where('userId', req.user?.id as number);
+    if (!usersIFollow) return response(400, { message: 'Failed to get users follows' }, res);
+
+    const usersICanFollow = usersExceptMe.filter(u => usersIFollow.filter(uif => uif.followsUserId === u.id).length < 1);
+
+    return response(200, { message: 'Fetched Users you could follow', usersICanFollow: usersICanFollow.slice(0, 5) }, res);
+  } catch (error) {
+    return response(500, { message: 'Exception in Fetching Users to follow' }, res, error);
+  }
+});
+
 /** Login */
 router.post('/login', ExistsValidator(Validate.Login), async (req: Request, res: Response) => {
   try {
-    console.log('login api');
+    console.log('login api', new Date());
 
     const user = await UserModel
       .query()
